@@ -1,0 +1,64 @@
+
+spring:
+  application:
+    name: admin
+  http:
+    encoding:
+      force-response: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://127.0.0.1:60298/mysql?useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true&amp;failOverReadOnly=false&useSSL=false
+    username: root
+    password: vislecaina
+    driver_class_name: com.mysql.jdbc.Driver
+#  mvc:
+#    static-path-pattern: /**
+#  resources:
+#    static-locations: classpath:/static
+  hikari:
+    # 初始化，最小，最大连接数
+    initialSize: 3
+    minidle: 3
+    maxActive: 18
+    # 获取数据库连接等待的超时时间
+    maxWait: 60000
+    # 配置多久进行一次检测，检测需要关闭的空闲连接 单位毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    validationQuery: SELECT 1 FROM dual
+    # 配置监控统计拦截的filters,去掉后，监控界面的sql无法统计
+    filters: stat,wall,log4j
+    connectionInitSqls: set names utf8mb4;
+#mybatis
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+#  type-aliases-package: com.fiberhome.iwork.com.fiberhome.nmosp.pas.entity*
+
+logging:
+  config: src/main/resources/log4j2.xml
+  path: logs/${spring.application.name}
+  level:
+    com:
+      fiberhome:
+        fts:
+          server:
+            admin:
+              mapper: debug
+            wechat:
+              dao: debug
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+  returnPageInfo: check
+#timing:
+#  produceSyncJob:
+#    cron: 0 0 2 1/1 * ?
+#  domSycJob:
+#    cron: 0 0 2 1/1 * ?
+
+
+
+
+
